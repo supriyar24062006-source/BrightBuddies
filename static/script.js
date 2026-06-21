@@ -3,12 +3,14 @@
 // ==========================
 
 const searchInput = document.querySelector("input[name='search']");
+const cards = document.querySelectorAll(".card");
 
 if (searchInput) {
-    searchInput.addEventListener("keyup", function () {
+
+    searchInput.addEventListener("input", function () {
 
         let filter = searchInput.value.toLowerCase();
-        let cards = document.querySelectorAll(".card");
+        let found = false;
 
         cards.forEach(card => {
 
@@ -16,13 +18,29 @@ if (searchInput) {
 
             if (text.includes(filter)) {
                 card.style.display = "block";
+                found = true;
             } else {
                 card.style.display = "none";
             }
 
         });
 
+        // show "not found" message
+        let msg = document.getElementById("no-results");
+
+        if (!msg) {
+            msg = document.createElement("p");
+            msg.id = "no-results";
+            msg.style.textAlign = "center";
+            msg.style.marginTop = "20px";
+            msg.style.color = "red";
+            document.querySelector(".card-container")?.after(msg);
+        }
+
+        msg.innerText = found ? "" : "No tutors available for this subject";
+
     });
+
 }
 
 
@@ -30,74 +48,58 @@ if (searchInput) {
 // BOOK BUTTON FUNCTION
 // ==========================
 
-const bookButtons = document.querySelectorAll(".card button");
+document.querySelectorAll(".card button").forEach(button => {
 
-if (bookButtons.length > 0) {
-    bookButtons.forEach(button => {
-
-        button.addEventListener("click", function () {
-            alert("Tutor booked successfully!");
-        });
-
+    button.addEventListener("click", function () {
+        alert("Tutor booked successfully!");
     });
-}
+
+});
 
 
 // ==========================
-// APPROVE / REJECT (Admin Panel Safe)
+// APPROVE / REJECT (ADMIN SAFE)
 // ==========================
 
-const approveButtons = document.querySelectorAll(".approve-btn");
+document.querySelectorAll(".approve-btn").forEach(button => {
 
-if (approveButtons.length > 0) {
-    approveButtons.forEach(button => {
-
-        button.addEventListener("click", function () {
-            alert("Tutor Approved!");
-            this.closest(".card, .row, div").remove();
-        });
-
+    button.addEventListener("click", function () {
+        alert("Tutor Approved!");
+        this.closest(".card, .row, div")?.remove();
     });
-}
 
-const rejectButtons = document.querySelectorAll(".reject-btn");
+});
 
-if (rejectButtons.length > 0) {
-    rejectButtons.forEach(button => {
+document.querySelectorAll(".reject-btn").forEach(button => {
 
-        button.addEventListener("click", function () {
-            alert("Tutor Rejected!");
-            this.closest(".card, .row, div").remove();
-        });
-
+    button.addEventListener("click", function () {
+        alert("Tutor Rejected!");
+        this.closest(".card, .row, div")?.remove();
     });
-}
+
+});
 
 
 // ==========================
-// LOGIN VALIDATION (SAFE)
+// LOGIN VALIDATION
 // ==========================
 
-const forms = document.querySelectorAll("form");
+document.querySelectorAll("form").forEach(form => {
 
-if (forms.length > 0) {
-    forms.forEach(form => {
+    form.addEventListener("submit", function (e) {
 
-        form.addEventListener("submit", function (e) {
+        let email = form.querySelector("input[type='email']");
+        let password = form.querySelector("input[type='password']");
 
-            let email = form.querySelector("input[type='email']");
-            let password = form.querySelector("input[type='password']");
+        if (email && password) {
 
-            if (email && password) {
-
-                if (email.value.trim() === "" || password.value.trim() === "") {
-                    e.preventDefault();
-                    alert("Please fill all fields.");
-                }
-
+            if (email.value.trim() === "" || password.value.trim() === "") {
+                e.preventDefault();
+                alert("Please fill all fields.");
             }
 
-        });
+        }
 
     });
-}
+
+});
