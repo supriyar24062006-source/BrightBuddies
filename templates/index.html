@@ -1,90 +1,268 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrightBuddies</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='indexstyle.css') }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrightBuddies</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f4f7fb;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+/* HERO */
+.hero {
+    height: 90vh;
+    background: url("{{ url_for('static', filename='images/hero.png') }}") no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero h2 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+}
+
+/* BUTTONS */
+.btn1 {
+    background: #2b6cb0;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.btn2 {
+    background: white;
+    color: #2b6cb0;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* SEARCH FORM (UPDATED) */
+.search {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.search input {
+    width: 60%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.search button {
+    padding: 12px 18px;
+    margin-left: 10px;
+    border: none;
+    background: #2b6cb0;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* TUTORS */
+.tutors {
+    padding: 50px;
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    width: 250px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* FOOTER */
+.footer {
+    background: #111;
+    color: white;
+    padding: 40px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    margin: 10px;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <h1 class="logo">BrightBuddies</h1>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <h1>BrightBuddies</h1>
 
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/find_tutors">Find Tutors</a></li>
-            <li><a href="/tutor-register">Tutor Register</a></li>
-            <li><a href="/student-register">Student Register</a></li>
-            <li><a href="/tutor-login">Tutor Login</a></li>
-            <li><a href="/student-login">Student Login</a></li>
-        </ul>
-    </nav>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/tutor-register">Tutor Register</a></li>
+        <li><a href="/student-register">Student Register</a></li>
+        <li><a href="/tutor-login">Tutor Login</a></li>
+        <li><a href="/student-login">Student Login</a></li>
+    </ul>
+</nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h2>Learn Together, Grow Together</h2>
+        <p>BrightBuddies connects students with expert tutors.</p>
 
-        <div class="hero-text">
-            <h2>Find Your Perfect Tutor</h2>
+        <a href="/find_tutors"><button class="btn1">Find a Tutor</button></a>
+        <a href="/tutor-register">
+            <button class="btn2">Become a Tutor</button>
+        </a>
+    </div>
+</section>
 
-            <p>
-                Learn smarter with expert tutors anytime, anywhere.
-            </p>
+<!-- SEARCH (FIXED WITH FORM) -->
+<section class="search">
 
-            <a href="/student-register">
-                <button>Get Started</button>
-            </a>
+    <h2>Search Tutors</h2>
 
+    <form action="/find_tutors" method="get">
+        <input type="text" name="search" placeholder="Math, Science, Coding...">
+        <button type="submit">Search</button>
+    </form>
+
+</section>
+
+<!-- TUTORS -->
+<section class="tutors">
+    <h2>Top Tutors</h2>
+
+    <div class="card-container">
+
+        <div class="card">
+            <h3>Rahul Sharma</h3>
+            <p>Mathematics Tutor</p>
+            <p>⭐ 4.9</p>
+            <button>Book Now</button>
         </div>
 
-    </section>
-
-    <!-- Search Section -->
-    <section class="search-section">
-
-        <h2>Search Tutors</h2>
-
-        <input type="text" placeholder="Search subjects like Math, Science, Coding...">
-
-    </section>
-
-    <!-- Tutor Cards -->
-    <section class="tutors">
-
-        <h2>Top Tutors</h2>
-
-        <div class="card-container">
-
-            <div class="card">
-                <h3>Rahul Sharma</h3>
-                <p>Mathematics Tutor</p>
-                <p>⭐ 4.9</p>
-
-                <button>Book Now</button>
-            </div>
-
-            <div class="card">
-                <h3>Priya Singh</h3>
-                <p>Science Tutor</p>
-                <p>⭐ 4.8</p>
-
-                <button>Book Now</button>
-            </div>
-
-            <div class="card">
-                <h3>Arjun Patel</h3>
-                <p>Python Tutor</p>
-                <p>⭐ 5.0</p>
-
-                <button>Book Now</button>
-            </div>
-
+        <div class="card">
+            <h3>Priya Singh</h3>
+            <p>Science Tutor</p>
+            <p>⭐ 4.8</p>
+            <button>Book Now</button>
         </div>
 
-    </section>
+        <div class="card">
+            <h3>Arjun Patel</h3>
+            <p>Python Tutor</p>
+            <p>⭐ 5.0</p>
+            <button>Book Now</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email: support@brightbuddies.com</p>
+        <p>Phone: +91 98765 43210</p>
+    </div>
+
+    <div class="footer-section">
+        <h3>About</h3>
+        <p>We connect students with verified tutors.</p>
+    </div>
+
+    <div class="footer-section">
+        <h3>Sitemap</h3>
+        <a href="/">Home</a>
+        <a href="/find_tutors">Find Tutors</a>
+        <a href="/tutor-register">Register</a>
+        <a href="/tutor-login">Login</a>
+    </div>
+
+</footer>
 
 </body>
 </html>

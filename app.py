@@ -6,16 +6,60 @@ app = Flask(__name__)
 # -------------------------
 # HOME PAGE
 # -------------------------
-
 @app.route('/')
 def home():
     return render_template('index.html')
 
 
 # -------------------------
+# FIND TUTORS (25 TUTORS + SEARCH)
+# -------------------------
+@app.route('/find_tutors')
+def find_tutors():
+
+    search = request.args.get('search', '').lower()
+
+    tutors = [
+        {"name": "Rahul Sharma", "subject": "Maths (Class 6–10)", "rating": "4.2"},
+        {"name": "Priya Singh", "subject": "Science (Class 6–10)", "rating": "4.6"},
+        {"name": "Arjun Patel", "subject": "Python (Degree)", "rating": "4.9"},
+        {"name": "Sneha Reddy", "subject": "English (Class 1–5)", "rating": "3.8"},
+        {"name": "Vikram Rao", "subject": "Physics (Class 11–12)", "rating": "4.1"},
+        {"name": "Ananya Das", "subject": "Chemistry (Class 11–12)", "rating": "4.7"},
+        {"name": "Kiran Kumar", "subject": "Biology (Class 8–10)", "rating": "3.5"},
+        {"name": "Meera Nair", "subject": "Hindi (Class 1–10)", "rating": "4.0"},
+        {"name": "Suresh Babu", "subject": "Social Studies (Class 6–10)", "rating": "2.9"},
+        {"name": "Divya Menon", "subject": "Computer Science (Degree)", "rating": "5.0"},
+        {"name": "Ravi Teja", "subject": "Maths (Degree)", "rating": "4.3"},
+        {"name": "Kavya Sharma", "subject": "English Literature (Degree)", "rating": "3.9"},
+        {"name": "Manoj Singh", "subject": "Physics (Degree)", "rating": "4.4"},
+        {"name": "Pooja Verma", "subject": "Chemistry (Class 6–10)", "rating": "3.2"},
+        {"name": "Akash Gupta", "subject": "Coding (Python/Java)", "rating": "4.8"},
+        {"name": "Neha Iyer", "subject": "Primary School Tutor", "rating": "3.6"},
+        {"name": "Siddharth Rao", "subject": "Advanced Maths", "rating": "4.5"},
+        {"name": "Lakshmi Devi", "subject": "EVS (Class 1–5)", "rating": "2.8"},
+        {"name": "Tarun Mehta", "subject": "Web Development", "rating": "5.0"},
+        {"name": "Ishita Jain", "subject": "Accountancy (Degree)", "rating": "4.1"},
+        {"name": "Amit Kumar", "subject": "Maths (Class 1–5)", "rating": "3.0"},
+        {"name": "Riya Sen", "subject": "Science (Class 1–5)", "rating": "3.7"},
+        {"name": "John Mathew", "subject": "Physics (Degree)", "rating": "4.6"},
+        {"name": "Deepa Rani", "subject": "Chemistry (Degree)", "rating": "4.2"},
+        {"name": "Vishal Singh", "subject": "Programming (C/C++)", "rating": "4.9"}
+    ]
+
+    # SEARCH FILTER
+    if search:
+        tutors = [
+            t for t in tutors
+            if search in t["name"].lower() or search in t["subject"].lower()
+        ]
+
+    return render_template("find_tutors.html", tutors=tutors, search=search)
+
+
+# -------------------------
 # STUDENT SECTION
 # -------------------------
-
 @app.route('/student-login')
 def student_login():
     return render_template('student_login.html')
@@ -40,9 +84,8 @@ def register_student():
     cursor = conn.cursor()
 
     cursor.execute("""
-    INSERT INTO students
-    (name, email, phone, grade, subject, password)
-    VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO students (name, email, phone, grade, subject, password)
+        VALUES (?, ?, ?, ?, ?, ?)
     """, (name, email, phone, grade, subject, password))
 
     conn.commit()
@@ -59,7 +102,6 @@ def student_dashboard():
 # -------------------------
 # TUTOR SECTION
 # -------------------------
-
 @app.route('/tutor-login')
 def tutor_login():
     return render_template('tutor_login.html')
@@ -86,9 +128,8 @@ def register_tutor():
     cursor = conn.cursor()
 
     cursor.execute("""
-    INSERT INTO tutors
-    (name, email, phone, qualification, subject, experience, about, password)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO tutors (name, email, phone, qualification, subject, experience, about, password)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, (name, email, phone, qualification, subject, experience, about, password))
 
     conn.commit()
@@ -102,15 +143,9 @@ def tutor_dashboard():
     return render_template('tutor_dashboard.html')
 
 
-@app.route('/find_tutors')
-def find_tutors():
-    return render_template('index.html')
-
-
 # -------------------------
 # LOGIN SECTION
 # -------------------------
-
 @app.route('/login_student', methods=['POST'])
 def login_student():
 
@@ -120,19 +155,14 @@ def login_student():
     conn = sqlite3.connect('brightbuddies.db')
     cursor = conn.cursor()
 
-    cursor.execute(
-        "SELECT * FROM students WHERE email=? AND password=?",
-        (email, password)
-    )
-
+    cursor.execute("SELECT * FROM students WHERE email=? AND password=?", (email, password))
     student = cursor.fetchone()
 
     conn.close()
 
     if student:
         return redirect(url_for('student_dashboard'))
-    else:
-        return "Invalid Student Email or Password"
+    return "Invalid Student Email or Password"
 
 
 @app.route('/login_tutor', methods=['POST'])
@@ -144,25 +174,19 @@ def login_tutor():
     conn = sqlite3.connect('brightbuddies.db')
     cursor = conn.cursor()
 
-    cursor.execute(
-        "SELECT * FROM tutors WHERE email=? AND password=?",
-        (email, password)
-    )
-
+    cursor.execute("SELECT * FROM tutors WHERE email=? AND password=?", (email, password))
     tutor = cursor.fetchone()
 
     conn.close()
 
     if tutor:
         return redirect(url_for('tutor_dashboard'))
-    else:
-        return "Invalid Tutor Email or Password"
+    return "Invalid Tutor Email or Password"
 
 
 # -------------------------
-# ADMIN SECTION
+# ADMIN
 # -------------------------
-
 @app.route('/admin-dashboard')
 def admin_dashboard():
     return render_template('admin_dashboard.html')
@@ -171,6 +195,5 @@ def admin_dashboard():
 # -------------------------
 # RUN APP
 # -------------------------
-
 if __name__ == '__main__':
-   app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)

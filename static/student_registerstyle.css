@@ -1,45 +1,60 @@
 body {
     font-family: Arial, sans-serif;
-    background: #eef5ff;
+    background: #f4f7fb;
     margin: 0;
     padding: 0;
 }
 
+/* FORM BOX */
 .container {
     width: 450px;
-    margin: 40px auto;
+    margin: 50px auto;
     background: white;
-    padding: 25px;
+    padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
 }
 
+/* TITLE */
 h2 {
     text-align: center;
     color: #1e90ff;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
+/* INPUT FIELDS */
 input,
 select {
     width: 100%;
     padding: 12px;
     margin-top: 8px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
 }
 
+input:focus,
+select:focus {
+    border-color: #1e90ff;
+    box-shadow: 0 0 5px rgba(30,144,255,0.3);
+}
+
+/* BUTTON */
 button {
     width: 100%;
     padding: 12px;
     background-color: #1e90ff;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
 }
 
 button:hover {

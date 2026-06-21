@@ -1,14 +1,13 @@
 // ==========================
-// Tutor Search Function
+// SEARCH FILTER (Find Tutors Page)
 // ==========================
 
-const searchInput = document.querySelector("input[type='text']");
+const searchInput = document.querySelector("input[name='search']");
 
 if (searchInput) {
     searchInput.addEventListener("keyup", function () {
 
         let filter = searchInput.value.toLowerCase();
-
         let cards = document.querySelectorAll(".card");
 
         cards.forEach(card => {
@@ -28,87 +27,77 @@ if (searchInput) {
 
 
 // ==========================
-// Book Session Buttons
+// BOOK BUTTON FUNCTION
 // ==========================
 
-const bookButtons = document.querySelectorAll("button");
+const bookButtons = document.querySelectorAll(".card button");
 
-bookButtons.forEach(button => {
-
-    if (
-        button.innerText === "Book Now" ||
-        button.innerText === "Book Session"
-    ) {
+if (bookButtons.length > 0) {
+    bookButtons.forEach(button => {
 
         button.addEventListener("click", function () {
-
             alert("Tutor booked successfully!");
-
         });
 
-    }
-
-});
+    });
+}
 
 
 // ==========================
-// Tutor Approval Section
+// APPROVE / REJECT (Admin Panel Safe)
 // ==========================
 
 const approveButtons = document.querySelectorAll(".approve-btn");
 
-approveButtons.forEach(button => {
+if (approveButtons.length > 0) {
+    approveButtons.forEach(button => {
 
-    button.addEventListener("click", function () {
-
-        alert("Tutor Approved!");
-
-        this.parentElement.parentElement.remove();
+        button.addEventListener("click", function () {
+            alert("Tutor Approved!");
+            this.closest(".card, .row, div").remove();
+        });
 
     });
-
-});
+}
 
 const rejectButtons = document.querySelectorAll(".reject-btn");
 
-rejectButtons.forEach(button => {
+if (rejectButtons.length > 0) {
+    rejectButtons.forEach(button => {
 
-    button.addEventListener("click", function () {
-
-        alert("Tutor Rejected!");
-
-        this.parentElement.parentElement.remove();
+        button.addEventListener("click", function () {
+            alert("Tutor Rejected!");
+            this.closest(".card, .row, div").remove();
+        });
 
     });
-
-});
+}
 
 
 // ==========================
-// Login Validation
+// LOGIN VALIDATION (SAFE)
 // ==========================
 
 const forms = document.querySelectorAll("form");
 
-forms.forEach(form => {
+if (forms.length > 0) {
+    forms.forEach(form => {
 
-    form.addEventListener("submit", function (e) {
+        form.addEventListener("submit", function (e) {
 
-        let email = form.querySelector("input[type='email']");
-        let password = form.querySelector("input[type='password']");
+            let email = form.querySelector("input[type='email']");
+            let password = form.querySelector("input[type='password']");
 
-        if (email && password) {
+            if (email && password) {
 
-            if (email.value.trim() === "" || password.value.trim() === "") {
-
-                e.preventDefault();
-
-                alert("Please fill all fields.");
+                if (email.value.trim() === "" || password.value.trim() === "") {
+                    e.preventDefault();
+                    alert("Please fill all fields.");
+                }
 
             }
 
-        }
+        });
 
     });
-
-});
+}
