@@ -5,7 +5,7 @@
 const searchInput = document.querySelector("input[name='search']");
 const cards = document.querySelectorAll(".card");
 
-if (searchInput) {
+if (searchInput && cards.length > 0) {
 
     searchInput.addEventListener("input", function () {
 
@@ -25,7 +25,7 @@ if (searchInput) {
 
         });
 
-        // show "not found" message
+        // No results message
         let msg = document.getElementById("no-results");
 
         if (!msg) {
@@ -40,7 +40,6 @@ if (searchInput) {
         msg.innerText = found ? "" : "No tutors available for this subject";
 
     });
-
 }
 
 
@@ -52,29 +51,6 @@ document.querySelectorAll(".card button").forEach(button => {
 
     button.addEventListener("click", function () {
         alert("Tutor booked successfully!");
-    });
-
-});
-
-
-// ==========================
-// APPROVE / REJECT (ADMIN SAFE)
-// ==========================
-
-document.querySelectorAll(".approve-btn").forEach(button => {
-
-    button.addEventListener("click", function () {
-        alert("Tutor Approved!");
-        this.closest(".card, .row, div")?.remove();
-    });
-
-});
-
-document.querySelectorAll(".reject-btn").forEach(button => {
-
-    button.addEventListener("click", function () {
-        alert("Tutor Rejected!");
-        this.closest(".card, .row, div")?.remove();
     });
 
 });
