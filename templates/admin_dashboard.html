@@ -1,0 +1,100 @@
+  id="supriya"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboardstyle.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1 class="logo">BrightBuddies Admin</h1>
+
+        <ul class="nav-links">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Tutors</a></li>
+            <li><a href="#">Students</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Dashboard Heading -->
+    <section class="dashboard-header">
+
+        <h2>Admin Dashboard</h2>
+        <p>Manage tutors, students, and platform activities.</p>
+
+    </section>
+
+    <!-- Dashboard Cards -->
+    <section class="dashboard-cards">
+
+        <div class="dashboard-card">
+            <h3>Total Tutors</h3>
+            <p>120</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Total Students</h3>
+            <p>450</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Pending Approvals</h3>
+            <p>18</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Total Bookings</h3>
+            <p>320</p>
+        </div>
+
+    </section>
+  
+    <!-- Tutor Approval Section -->
+    <section class="approval-section">
+
+        <h2>Pending Tutor Approvals</h2>
+
+        <table>
+
+            <tr>
+                <th>Name</th>
+                <th>Subject</th>
+                <th>Experience</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <td>Rahul Sharma</td>
+                <td>Mathematics</td>
+                <td>5 Years</td>
+
+                <td>
+                    <button class="approve-btn">Approve</button>
+                    <button class="reject-btn">Reject</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Priya Singh</td>
+                <td>Science</td>
+                <td>3 Years</td>
+
+                <td>
+                    <button class="approve-btn">Approve</button>
+                    <button class="reject-btn">Reject</button>
+                </td>
+            </tr>
+
+        </table>
+
+    </section>
+
+</body>
+</html>
+

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrightBuddies</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='indexstyle.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1 class="logo">BrightBuddies</h1>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/find_tutors">Find Tutors</a></li>
+            <li><a href="/tutor-register">Tutor Register</a></li>
+            <li><a href="/student-register">Student Register</a></li>
+            <li><a href="/tutor-login">Tutor Login</a></li>
+            <li><a href="/student-login">Student Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-text">
+            <h2>Find Your Perfect Tutor</h2>
+
+            <p>
+                Learn smarter with expert tutors anytime, anywhere.
+            </p>
+
+            <a href="/student-register">
+                <button>Get Started</button>
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+
+        <h2>Search Tutors</h2>
+
+        <input type="text" placeholder="Search subjects like Math, Science, Coding...">
+
+    </section>
+
+    <!-- Tutor Cards -->
+    <section class="tutors">
+
+        <h2>Top Tutors</h2>
+
+        <div class="card-container">
+
+            <div class="card">
+                <h3>Rahul Sharma</h3>
+                <p>Mathematics Tutor</p>
+                <p>⭐ 4.9</p>
+
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Priya Singh</h3>
+                <p>Science Tutor</p>
+                <p>⭐ 4.8</p>
+
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Arjun Patel</h3>
+                <p>Python Tutor</p>
+                <p>⭐ 5.0</p>
+
+                <button>Book Now</button>
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

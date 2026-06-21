@@ -1,0 +1,68 @@
+/* Student Login Page */
+
+.login-container{
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(to right, #2563eb, #3b82f6);
+}
+.login-box{
+    background: white;
+
+    width: 400px;
+    padding: 40px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.login-box h1{
+    margin-bottom: 30px;
+    color: #2563eb;
+}
+
+.login-box input{
+    width: 100%;
+
+    padding: 14px;
+    margin-bottom: 20px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+.login-box button{
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.login-box p{
+    margin-top: 20px;
+}
+
+.login-box a{
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutor Registration - BrightBuddies</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+        }
+        .container{
+            width:400px;
+            margin:50px auto;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+        h2{
+            text-align:center;
+            color:#4CAF50;
+        }
+        input, select, textarea{
+            width:100%;
+            padding:10px;
+            margin:8px 0;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+        button{
+            width:100%;
+            padding:10px;
+            background:#4CAF50;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
+        button:hover{
+            background:#45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Tutor Registration</h2>
+
+    <form action="/register_tutor" method="POST">
+
+        <input type="text" name="name" placeholder="Full Name" required>
+
+        <input type="email" name="email" placeholder="Email" required>
+
+        <input type="text" name="phone" placeholder="Phone Number" required>
+
+        <input type="text" name="qualification" placeholder="Qualification" required>
+
+        <input type="text" name="subject" placeholder="Subject to Teach" required>
+
+        <input type="number" name="experience" placeholder="Years of Experience">
+
+        <textarea name="about" rows="4" placeholder="Tell us about yourself"></textarea>
+
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Register as Tutor</button>
+
+    </form>
+</div>
+
+</body>
+</html>

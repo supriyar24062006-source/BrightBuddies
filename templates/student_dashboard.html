@@ -1,0 +1,67 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='student_dashboardstyle.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1 class="logo">BrightBuddies</h1>
+
+        <ul class="nav-links">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Find Tutors</a></li>
+            <li><a href="#">Bookings</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <section class="dashboard-header">
+        <h2>Welcome Student 👋</h2>
+        <p>Find the best tutors and start learning today.</p>
+    </section>
+
+    <!-- Search Box -->
+    <section class="search-section">
+        <h2>Search Tutors</h2>
+
+        <input
+            type="text"
+            placeholder="Search for Math, Coding, Science..."
+            class="search-box"
+        >
+    </section>
+
+    <!-- Tutor Cards -->
+    <section class="tutors-container">
+
+        <div class="card">
+            <h3>Rahul Sharma</h3>
+            <p>Mathematics Expert</p>
+            <p>⭐ 4.9</p>
+            <p>₹500/hour</p>
+            <button>Book Session</button>
+        </div>
+
+        <div class="card">
+            <h3>Priya Singh</h3>
+            <p>Science Tutor</p>
+            <p>⭐ 4.8</p>
+            <p>₹450/hour</p>
+            <button>Book Session</button>
+        </div>
+
+    </section>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
