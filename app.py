@@ -1,11 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for
+import os
 import sqlite3
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'brightbuddies.db')
+
 
 def init_db():
-    conn = sqlite3.connect('brightbuddies.db', timeout=10)
+    conn = sqlite3.connect(DB_PATH, timeout=10)
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -130,7 +134,7 @@ def register_student():
     subject = request.form['subject']
     password = request.form['password']
 
-    conn = sqlite3.connect('brightbuddies.db', timeout=10)
+    conn = sqlite3.connect(DB_PATH, timeout=10)
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -174,7 +178,7 @@ def register_tutor():
     about = request.form['about']
     password = request.form['password']
 
-    conn = sqlite3.connect('brightbuddies.db', timeout=10)
+    conn = sqlite3.connect(DB_PATH, timeout=10)
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -208,7 +212,7 @@ def book_tutor():
     date = request.form.get('date')
     message = request.form.get('message')
 
-    conn = sqlite3.connect('brightbuddies.db', timeout=10)
+    conn = sqlite3.connect(DB_PATH, timeout=10)
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -243,7 +247,7 @@ def login_student():
     email = request.form['email']
     password = request.form['password']
 
-    conn = sqlite3.connect('brightbuddies.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM students WHERE email=? AND password=?", (email, password))
@@ -262,7 +266,7 @@ def login_tutor():
     email = request.form['email']
     password = request.form['password']
 
-    conn = sqlite3.connect('brightbuddies.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM tutors WHERE email=? AND password=?", (email, password))
