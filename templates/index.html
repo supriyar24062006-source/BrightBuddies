@@ -214,6 +214,30 @@ body {
     width: 250px;
     border-radius: 12px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.book-btn {
+    margin-top: 12px;
+    padding: 10px 16px;
+    border: none;
+    background: #2b6cb0;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+    width: 100%;
+}
+
+.book-btn:hover {
+    background: #1f4f85;
+    transform: scale(1.02);
 }
 
 /* FOOTER */
@@ -243,6 +267,107 @@ body {
 
 .footer-section a:hover {
     color: white;
+}
+
+/* BOOKING MODAL */
+#bookingModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#bookingModal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: #2b6cb0;
+    font-size: 20px;
+}
+
+.booking-form-group {
+    margin-bottom: 12px;
+}
+
+.booking-form-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.booking-form-group input,
+.booking-form-group textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.booking-form-group input:focus,
+.booking-form-group textarea:focus {
+    border-color: #2b6cb0;
+    outline: none;
+}
+
+.booking-form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.booking-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.booking-buttons button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+#bookingCancel {
+    background: #e0e0e0;
+    color: #333;
+}
+
+#bookingCancel:hover {
+    background: #d0d0d0;
+}
+
+.booking-form-group button[type="submit"] {
+    background: #2b6cb0;
+    color: white;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.booking-form-group button[type="submit"]:hover {
+    background: #1f4f85;
 }
 
 </style>
@@ -298,25 +423,26 @@ body {
     <div class="card-container">
 
         <div class="card">
-            <h3>Rahul Sharma</h3>
-            <p>Mathematics Tutor</p>
-            <p>⭐ 4.9</p>
-            <button>Book Now</button>
+          <h3>Rahul Sharma</h3>
+          <p>Mathematics Tutor</p>
+           <p>⭐ 4.9</p>
+           <button class="book-btn">Book Now</button>
         </div>
-
-        <div class="card">
-            <h3>Priya Singh</h3>
-            <p>Science Tutor</p>
-            <p>⭐ 4.8</p>
-            <button>Book Now</button>
+       
+         <div class="card">
+           <h3>Priya Singh</h3>
+           <p>Science Tutor</p>
+           <p>⭐ 4.8</p>
+           <button class="book-btn">Book Now</button>
         </div>
-
-        <div class="card">
-            <h3>Arjun Patel</h3>
-            <p>Python Tutor</p>
-            <p>⭐ 5.0</p>
-            <button>Book Now</button>
-        </div>
+   
+         <div class="card">
+           <h3>Arjun Patel</h3>
+           <p>Python Tutor</p>
+           <p>⭐ 5.0</p>
+           <button class="book-btn">Book Now</button>
+       </div>
+    
 
     </div>
 </section>
@@ -345,6 +471,41 @@ body {
 
 </footer>
 
+<!-- BOOKING MODAL -->
+<div id="bookingModal">
+    <div class="modal-content">
+        <h3>Book Tutor</h3>
+        <form id="bookingForm" action="/book_tutor" method="post">
+            <input type="hidden" name="tutor" id="bookingTutor">
+            <div class="booking-form-group">
+                <label>Your name</label>
+                <input type="text" name="name" required />
+            </div>
+            <div class="booking-form-group">
+                <label>Email</label>
+                <input type="email" name="email" required />
+            </div>
+            <div class="booking-form-group">
+                <label>Phone</label>
+                <input type="tel" name="phone" />
+            </div>
+            <div class="booking-form-group">
+                <label>Preferred date</label>
+                <input type="date" name="date" />
+            </div>
+            <div class="booking-form-group">
+                <label>Message</label>
+                <textarea name="message"></textarea>
+            </div>
+            <div class="booking-buttons">
+                <button type="button" id="bookingCancel">Cancel</button>
+                <button type="submit" style="width: auto; background: #2b6cb0; color: white;">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

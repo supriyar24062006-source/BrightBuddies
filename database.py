@@ -1,3 +1,4 @@
+
 import sqlite3
 
 # Connect to database
@@ -5,7 +6,9 @@ conn = sqlite3.connect("brightbuddies.db")
 
 cursor = conn.cursor()
 
-# Student Table
+# -------------------------
+# STUDENT TABLE
+# -------------------------
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,8 +21,9 @@ CREATE TABLE IF NOT EXISTS students (
 )
 """)
 
-
-# Tutor Table
+# -------------------------
+# TUTOR TABLE
+# -------------------------
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS tutors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,19 +38,26 @@ CREATE TABLE IF NOT EXISTS tutors (
 )
 """)
 
-
-# Booking Table
+# -------------------------
+# BOOKING TABLE
+# -------------------------
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS bookings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    student_id INTEGER,
-    tutor_id INTEGER,
-    booking_date TEXT,
-    status TEXT DEFAULT 'Pending'
+    tutor TEXT,
+    name TEXT,
+    email TEXT,
+    phone TEXT,
+    date TEXT,
+    message TEXT
 )
 """)
 
+# Save changes
 conn.commit()
+
+# Close connection
 conn.close()
 
 print("BrightBuddies Database Created Successfully!")
+

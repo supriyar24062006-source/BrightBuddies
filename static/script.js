@@ -58,16 +58,36 @@ if (searchInput && cards.length > 0) {
 
 
 // ==========================
-// BOOK BUTTON FUNCTION
+// BOOK BUTTON FUNCTION (opens booking modal)
 // ==========================
 
-document.querySelectorAll(".card button").forEach(button => {
+const bookingModal = document.getElementById('bookingModal');
+const bookingForm = document.getElementById('bookingForm');
+const bookingTutorInput = document.getElementById('bookingTutor');
 
-    button.addEventListener("click", function () {
-        alert("Tutor booked successfully!");
+document.querySelectorAll('.card button, .book-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const card = button.closest('.card');
+        const tutorName = card?.querySelector('h3')?.innerText || '';
+        if (bookingTutorInput) bookingTutorInput.value = tutorName;
+        if (bookingModal) bookingModal.classList.add('active');
     });
-
 });
+
+// Cancel button 
+document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'bookingCancel') {
+        if (bookingModal) bookingModal.classList.remove('active');
+    }
+});
+
+// Close modal when clicking outside the dialog
+if (bookingModal) {
+    bookingModal.addEventListener('click', function (e) {
+        if (e.target === bookingModal) bookingModal.classList.remove('active');
+    });
+}
+
 
 
 // ==========================

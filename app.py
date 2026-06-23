@@ -55,6 +55,7 @@ def find_tutors():
         ]
 
     return render_template("find_tutors.html", tutors=tutors, search=search)
+ 
 
 
 # -------------------------
@@ -141,6 +142,47 @@ def register_tutor():
 @app.route('/tutor-dashboard')
 def tutor_dashboard():
     return render_template('tutor_dashboard.html')
+
+
+# -------------------------
+# BOOK TUTOR
+# -------------------------
+@app.route('/book_tutor', methods=['GET', 'POST'])
+def book_tutor():
+    if request.method == 'GET':
+        return render_template('booking_form.html')
+
+    tutor = request.form.get('tutor')
+    name = request.form.get('name')
+    email = request.form.get('email')
+    phone = request.form.get('phone')
+    date = request.form.get('date')
+    message = request.form.get('message')
+
+    conn = sqlite3.connect('brightbuddies.db', timeout=10)
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS bookings (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tutor TEXT,
+            name TEXT,
+            email TEXT,
+            phone TEXT,
+            date TEXT,
+            message TEXT
+        )
+    ''')
+
+    cursor.execute(
+        "INSERT INTO bookings (tutor, name, email, phone, date, message) VALUES (?, ?, ?, ?, ?, ?)",
+        (tutor, name, email, phone, date, message)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return render_template('booking_success.html', tutor=tutor, name=name)
 
 
 # -------------------------
