@@ -1,3 +1,4 @@
+alert("Script Loaded");
 // ==========================
 // MOBILE MENU TOGGLE
 // ==========================
@@ -113,3 +114,32 @@ document.querySelectorAll("form").forEach(form => {
     });
 
 });
+// ==========================
+// DASHBOARD SIDEBAR TOGGLE
+// ==========================
+
+function toggleMenu() {
+    document.getElementById("sidebar").classList.toggle("active");
+}
+
+// ==========================
+// HOME DROPDOWN MENU
+// ==========================
+
+const homeDropdown = document.getElementById("homeDropdown");
+const dropdownMenu = document.querySelector(".dropdown-menu");
+
+if (homeDropdown && dropdownMenu) {
+
+    homeDropdown.addEventListener("click", function (e) {
+        e.preventDefault();
+        dropdownMenu.classList.toggle("show");
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!homeDropdown.parentElement.contains(e.target)) {
+            dropdownMenu.classList.remove("show");
+        }
+    });
+
+}

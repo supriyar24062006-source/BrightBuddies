@@ -63,6 +63,21 @@ init_db()
 def home():
     return render_template('index.html')
 
+# -------------------------
+# ABOUT PAGE
+# -------------------------
+@app.route('/about')
+def about():
+    return render_template('about_us.html')
+
+
+# -------------------------
+# CONTACT PAGE
+# -------------------------
+@app.route('/contact')
+def contact():
+    return render_template('contact_us.html')
+
 
 # -------------------------
 # FIND TUTORS (25 TUTORS + SEARCH)
